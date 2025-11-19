@@ -1,0 +1,7 @@
+{
+  "name": "SafeHer",
+  "description": "A women's safety application featuring one-tap WhatsApp SOS signaling with live location and an AI-powered safety advisor.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
