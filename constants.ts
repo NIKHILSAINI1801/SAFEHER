@@ -1,4 +1,4 @@
-export const DEFAULT_SOS_MESSAGE = "SOS! I need help immediately. Here is my current location:";
+export const DEFAULT_SOS_MESSAGE = " I NEED YOUR HELP ! , SOMEONE IS FOLLOWING ME. Here is my current location:";
 
 export const SAFETY_TIPS = [
   "Share your live location with a trusted contact when traveling alone.",
