@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Contact, LocationData } from '../types';
 import { getCurrentLocation, generateGoogleMapsLink, generateWhatsAppLink } from '../services/locationService';
 import { DEFAULT_SOS_MESSAGE } from '../constants';
-import { AlertTriangle, MapPin, Send, XCircle, Loader2, CheckCircle2 } from 'lucide-react';
+import { AlertTriangle, MapPin, Send, XCircle, Loader2, CheckCircle2, Shield } from 'lucide-react';
 
 interface SOSViewProps {
   contacts: Contact[];
@@ -47,6 +47,15 @@ export const SOSView: React.FC<SOSViewProps> = ({ contacts, onCancel }) => {
     const mapsLink = location.latitude !== 0 ? generateGoogleMapsLink(location) : "[Location Unavailable]";
     const link = generateWhatsAppLink(contact.phone, DEFAULT_SOS_MESSAGE, mapsLink);
     window.open(link, '_blank');
+  };
+
+  const handleSendToPolice = () => {
+    if (!location) return;
+    const mapsLink = location.latitude !== 0 ? generateGoogleMapsLink(location) : "[Location Unavailable]";
+    const message = `${DEFAULT_SOS_MESSAGE} ${mapsLink}`;
+    // Use SMS to emergency number (112 for India, or 100 for police)
+    const smsLink = `sms:112?body=${encodeURIComponent(message)}`;
+    window.open(smsLink, '_blank');
   };
 
   return (
@@ -128,7 +137,27 @@ export const SOSView: React.FC<SOSViewProps> = ({ contacts, onCancel }) => {
         </div>
 
         <h2 className="text-xl font-semibold text-white mb-4">Send SOS to:</h2>
-        
+
+        {/* Police Alert Button */}
+        <button
+          onClick={handleSendToPolice}
+          disabled={loading}
+          className="w-full flex items-center justify-between bg-red-800 hover:bg-red-700 p-4 rounded-xl border border-red-700 group transition-all active:scale-[0.98] mb-4"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center">
+              <Shield className="text-white" size={24} />
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-lg text-white">Police PCR</div>
+              <div className="text-red-300 text-sm">Send emergency alert to nearest police</div>
+            </div>
+          </div>
+          <div className="bg-red-500 p-3 rounded-full text-white group-hover:bg-red-400 shadow-lg shadow-red-900/20">
+            <Send size={20} className="ml-1" />
+          </div>
+        </button>
+
         <div className="space-y-3">
             {contacts.length === 0 ? (
                 <div className="p-4 bg-slate-900 border border-slate-800 rounded-lg text-center text-slate-500">

@@ -1,0 +1,3 @@
+- [x] Remove GEMINI_SYSTEM_INSTRUCTION from constants.ts
+- [x] Add police alert feature to SOSView.tsx (send SMS to emergency number with location)
+- [ ] Test the app to ensure chatbot works and SOS includes police alert

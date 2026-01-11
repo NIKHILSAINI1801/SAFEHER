@@ -81,7 +81,7 @@ export const SafetyAssistant: React.FC = () => {
         </div>
         <div>
           <h2 className="font-bold text-white">Safety Assistant</h2>
-          <p className="text-xs text-slate-400">Powered by Gemini</p>
+          <p className="text-xs text-slate-400">AI-Powered Safety Advice</p>
         </div>
       </div>
 
